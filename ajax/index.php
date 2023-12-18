@@ -28,7 +28,7 @@ switch ($_GET["op"]){
     break;	
 
     case 'iniciar_sesion':
-        $input_login_correo = $_POST['input_login_correo'];
+        $input_login_correo = $_POST['input_email'];
         $input_login_pass = $_POST['input_login_pass'];      
         $rspta=$index->iniciar_sesion($input_login_correo,$input_login_pass);
          echo json_encode($rspta);        

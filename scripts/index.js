@@ -2,9 +2,14 @@ var verbo_infinitivo = "";
 var verbo_pasado_simple = "";
 var verbo_pasado_part = "";
 var espanol = "";
+var sesion = 0;
 
 function init(){
-    inicial();
+    //alert(sesion);
+    if (sesion==0) {
+        inicial();
+    }
+    
     var min = 1;
     var max = 223;
     var aleatorio = Math.random() * (max - min) + min;
@@ -127,6 +132,8 @@ function revisar(){
             document.getElementById("eti_incorrecto").style.display = "block";
         }
     }
+
+    
     
 }
 
@@ -190,7 +197,7 @@ function iniciar_sesion_div(){
 }
 
 function guardar_usuario(){
-    
+   
     var input_pass = $("#input_pass").val();
     var input_pass_rep = $("#input_pass_rep").val();
     var capt_email = $("#input_email").val();
@@ -213,6 +220,10 @@ function guardar_usuario(){
                             document.getElementById("div_fondo2").style.display = "none";
                             document.getElementById("nav_verbos").style.display = "block";
                             document.getElementById("container_practice").style.display = "block";
+                            sesion = 1;
+                            $("#input_email").val("");
+                            $("#input_pass_rep").val("");
+                            $("#input_pass").val("");
                         });
                         
                     }else{
@@ -234,28 +245,60 @@ function ocultar_et(){
 }
 
 function iniciar_sesion(){
-    var input_login_correo = $("#input_login_correo").val();
+    // var input_login_correo = $("#input_login_correo").val();
     var input_login_pass = $("#input_login_pass").val();
-    // alert(input_login_correo);
-    // alert(input_login_pass);
 
-    $.post("ajax/index.php?op=iniciar_sesion",{input_login_correo:input_login_correo,input_login_pass:input_login_pass},function(data, status)
-    {
-        data = JSON.parse(data);
-        console.log(data.user_enc);
+    var capt_email = $("#input_login_correo").val();
+    var input_email = capt_email.trim();
+    var result = input_email.indexOf("@");
 
-        if (data.user_enc>0) {
+    if (result>=0){
 
-            document.getElementById("div_fondo1").style.display = "none";
-            document.getElementById("div_fondo2").style.display = "none";
-            document.getElementById("nav_verbos").style.display = "block";
-            document.getElementById("container_practice").style.display = "block";
-            
-        }else{
-            alert("Correo o contraseña incorrectas");
-        }
-                          
-    });
+        $.post("ajax/index.php?op=buscar_usuario",{input_email:input_email},function(data, status)
+        {
+            data = JSON.parse(data);
+
+            if (data==null) {
+                alert("No se encontro el usuario capturado");
+                return;
+            }
+            if (data.tipo==0) {
+                alert("El usuario capturado ha sido registrado con una cuenta de Google");
+                return;
+            }
+
+            if (data.tipo==1) {
+
+                $.post("ajax/index.php?op=iniciar_sesion",{input_email:input_email,input_login_pass:input_login_pass},function(data, status)
+                {
+                    data = JSON.parse(data);
+                    console.log(data.user_enc);
+
+                    if (data.user_enc>0) {
+
+                        document.getElementById("div_fondo1").style.display = "none";
+                        document.getElementById("div_fondo2").style.display = "none";
+                        document.getElementById("nav_verbos").style.display = "block";
+                        document.getElementById("container_practice").style.display = "block";
+                        sesion = 1;
+                        $("#input_login_pass").val("");
+                        $("#input_login_correo").val("");
+                        
+                    }else{
+                        alert("Correo o contraseña incorrectas");
+                    }
+                                    
+                });
+                
+            }           
+
+        });
+
+    }else{
+        alert("Por favor capture un correo electrónico.");
+    }
+
+    
 }
 
 init();

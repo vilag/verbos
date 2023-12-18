@@ -40,6 +40,8 @@
                     let welcome = '<img style="width: 40px; border-radius: 50%;" src="'+responsePayload.picture+'"/>';
                     document.getElementsByClassName("pro-data")[0].innerHTML = welcome;
 
+                    sesion = 1;
+
                     // let profileHTML = '<h3>Welcome '+responsePayload.given_name+'! <a href="javascript:void(0);" onclick="signOut('+responsePayload.sub+');">Sign out</a></h3>';
                     // profileHTML += '<img src="'+responsePayload.picture+'"/><p><b>Auth ID: </b>'+responsePayload.sub+'</p><p><b>Name: </b>'+responsePayload.name+'</p><p><b>Email: </b>'+responsePayload.email+'</p>';
                     
@@ -58,20 +60,26 @@
 
         // Sign out the user
         function signOut(authID) {
-
+            //alert("entra authID");
             document.getElementById("div_fondo1").style.display = "block";
             document.getElementById("div_fondo2").style.display = "block";
             document.getElementById("nav_verbos").style.display = "none";
             document.getElementById("container_practice").style.display = "none";
-
+            sesion = 0;
+            document.getElementById("div_login").style.display="block";
+            document.getElementById("div_reg").style.display="none";
+            document.getElementById("img_back").style.visibility="hidden";
         }
         function signOut_1() {
-
+            //alert("entra");
             document.getElementById("div_fondo1").style.display = "block";
             document.getElementById("div_fondo2").style.display = "block";
             document.getElementById("nav_verbos").style.display = "none";
             document.getElementById("container_practice").style.display = "none";
-
+            sesion = 0;
+            document.getElementById("div_login").style.display="block";
+            document.getElementById("div_reg").style.display="none";
+            document.getElementById("img_back").style.visibility="hidden";
         }
     </script>
 </head>
@@ -92,7 +100,7 @@
         <div style="width: 100%; text-align: center; padding-top: 10px;">
             <b style="color: #083F6E; font-size: 30px;">Verbos</b>
         </div>
-        <div id="div_login" style="width: 100%; display: block;">
+        <div id="div_login" style="width: 100%;">
             <div style="width: 100%; text-align: center; padding-top: 40px;">
                 <p>Login to your Account</p>
             </div>
