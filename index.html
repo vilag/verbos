@@ -109,7 +109,7 @@
             </div>          
         </div>
         <div style="width: 100%; text-align: center; padding-top: 10px;">
-            <b style="color: #083F6E; font-size: 30px;">Iniciar Sesion</b>
+            <b style="color: #083F6E; font-size: 30px;">Verbos</b>
         </div>
         <div id="div_login" style="width: 100%;">
             <div style="width: 100%; text-align: center; padding-top: 40px;">
@@ -271,12 +271,12 @@
                 <input type="text" id="verb_resp" style="height: 30px; width: 200px; margin-top: 7px;" onkeypress="if (event.keyCode==13) {event.returnValue=false;revisar();}">
             </div>
             <div style="width: 100%; text-align: center; padding: 30px 10px 10px 10px;">
-                <div style="width: 100%; padding: 10px;">
-                    <button style="padding: 15px; width: 200px; background-color: #038F73; color: #fff; border: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" onclick="revisar();">Enviar</button>
+                <div style="width: 100%; padding: 10px; display: flex; justify-content: center;">
+                    <button id="btn_enviar" style="padding: 15px; width: 200px; background-color: #038F73; color: #fff; border: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" onclick="revisar();">Enviar</button>
                 </div>
-                <div style="width: 100%; padding: 10px;">
+                <div style="width: 100%; padding: 10px; display: flex; justify-content: center;">
 
-                    <button style="padding: 15px; width: 200px; background-color: #145192; color: #fff; border: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" onclick="recargar();">Siguiente</button>
+                    <button id="btn_siguiente" style="padding: 15px; width: 200px; background-color: #145192; color: #fff; border: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" onclick="recargar();">Siguiente</button>
                 </div>
             </div>
 

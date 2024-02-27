@@ -3,6 +3,8 @@ var verbo_pasado_simple = "";
 var verbo_pasado_part = "";
 var espanol = "";
 var sesion = 0;
+document.getElementById("btn_enviar").style.display = "block";
+document.getElementById("btn_siguiente").style.display = "none";
 
 function init(){
     //alert(sesion);
@@ -88,12 +90,19 @@ function revisar(){
             $("#verbo_data2").text(espanol);
             document.getElementById("eti_correcto").style.display = "block";
             document.getElementById("eti_incorrecto").style.display = "none";
+            setTimeout(() => {
+                recargar();
+            }, 2500);
         }else{
             //alert("Incorrecto");
             $("#verbo_data2").text(espanol);
             document.getElementById("eti_correcto").style.display = "none";
             document.getElementById("eti_incorrecto").style.display = "block";
+            document.getElementById("btn_enviar").style.display = "none";
+            document.getElementById("btn_siguiente").style.display = "block";
         }
+
+        
     }
 
     if (idpracticar==2) {
@@ -143,6 +152,8 @@ function recargar(){
     $("#verb_resp").val("");
     document.getElementById("eti_correcto").style.display = "none";
     document.getElementById("eti_incorrecto").style.display = "none";
+    document.getElementById("btn_enviar").style.display = "block";
+    document.getElementById("btn_siguiente").style.display = "none";
 }
 
 function ajustar_eti(){
